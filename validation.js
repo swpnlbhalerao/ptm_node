@@ -5,9 +5,9 @@ const Joi=require('@hapi/joi');
 const registerValidation=(data)=>{
 
     const schema={
-        firstName :Joi.string().min(6).required(),
-        lastName :Joi.string().min(6).required(),
-        userName :Joi.string().min(6).required(),
+        firstName :Joi.string().min(4).required(),
+        lastName :Joi.string().min(4).required(),
+        userName :Joi.string().min(5).required(),
         phone :Joi.string().required(),
         email :Joi.string().min(8).required().email(),
         password :Joi.string().min(6).required()

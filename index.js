@@ -2,9 +2,10 @@ const  express=require('express');
 const app=express();
 const mongoose=require('mongoose');
 const dotenv =require('dotenv');
-
 dotenv.config();
 
+const cors = require('cors');
+app.use(cors());
 //connec to db
 mongoose.connect(process.env.Db_Connect,
 { useNewUrlParser: true },(error)=>{
