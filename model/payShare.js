@@ -20,9 +20,11 @@ const paySchema = new mongoose.Schema({
     },
     mdyBy: {
         type: String,
+        default: '',
     },
     mdyDate: {
         type: String,
+        default : ''
     },
     status: {
         type: String,
@@ -30,11 +32,11 @@ const paySchema = new mongoose.Schema({
     paymentDate: {
         type: String,
     },paymentDay: {
-        type: String,
+        type: Number,
     },paymentMonth: {
-        type: String,
+        type: Number,
     },paymentYear: {
-        type: String,
+        type: Number,
     }
 })
 

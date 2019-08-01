@@ -4,10 +4,11 @@ const moment =require('moment-timezone');
 const PayShare = require('../model/payShare')
 
 
-router.get('/pay', async(req, res) => {
+router.post('/pay', async(req, res) => {
    
     try {
 
+    /*  console.log(req.body);   */ 
     const payReqValues = new PayShare({
         userName: req.body.userName,
         amount: req.body.amount,
@@ -26,4 +27,32 @@ router.get('/pay', async(req, res) => {
         return res.status(400).send({ status: 'fail', message: 'something went wrong  ' + error.message });
     }
 })
+
+
+router.post('/getPayHistByUser', async(req, res) => {
+
+    try {
+        let year=+req.body.year;
+        let user=req.body.userName;
+         data=[];
+        
+         let userData  = await  PayShare.aggregate([ 
+            {$match :{ userName :user,paymentYear : year}},
+            {$sort: {paymentMonth:-1,paymentDay:-1}},
+            {$project: {_id:0,crtIp :0,paymentDay :0,paymentMonth :0,paymentYear :0,}}
+            ])
+
+            /* console.log(userData); */
+         
+        res.send({ status: "success", message: "payHistory  user Data ", data : userData })
+
+    } catch (error) {
+        return res.status(400).send({ status: 'fail', message: 'something went wrong ohh  ' + error.message });
+    }
+})
+
+
+
+
+
 module.exports = router

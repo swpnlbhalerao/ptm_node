@@ -8,7 +8,7 @@ const moment = require('moment-timezone');
 moment.tz.setDefault('Asia/Kolkata')
 
 router.post('/register', async (req, res) => {
-    console.log(req.body);
+    /* console.log(req.body); */
 
     //validate user details
     const { error } = registerValidation(req.body);
@@ -52,7 +52,7 @@ router.post('/register', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    console.log(req.body);
+   /*  console.log(req.body); */
 
     const { error } = loginValidation(req.body)
 
@@ -81,9 +81,9 @@ router.post('/login', async (req, res) => {
             lastLoginDate: user.curr_login_date
         }
     }).then((data) => {
-        console.log(data)
+       /*  console.log(data) */
     }).catch((err) => {
-        console.log(err)
+       /*  console.log(err) */
     })
 
 
@@ -93,8 +93,8 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/getUserInfo', async (req, res) => {
-    console.log(req.body);
-    console.log("asdasd");
+   /*  console.log(req.body); */
+   
     //const { error } = loginValidation(req.body)
     try {
         if (req.body.userName) {
