@@ -66,29 +66,28 @@ router.post('/login', async (req, res) => {
     }
 
     if (!user) {
-        return res.status(400).send({ status: 'fail', message: 'user name doesnt exist' });
+        return res.status(401).send({ status: 'fail', message: 'user name doesnt exist' });
     }
 
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!validPassword) {
-        return res.status(400).send({ status: 'fail', message: 'password doesnt exist' });
+        return res.status(401).send({ status: 'fail', message: 'password doesnt exist' });
     }
 
     //update last login
-    User.findOneAndUpdate({ _id: user._id }, {
+    /* User.findOneAndUpdate({ _id: user._id }, {
         $set: {
             curr_login_date: moment(),
             lastLoginDate: user.curr_login_date
         }
     }).then((data) => {
-       /*  console.log(data) */
     }).catch((err) => {
-       /*  console.log(err) */
-    })
+       
+    }) */
 
 
     const signatureToken = await jwt.sign({ _id: user._id }, process.env.Secret_Token);
-    res.header({ 'auth-token': signatureToken, expiresIn: 600 }).send({ status: 'success', message: 'login success full',userInfo: user ,'authtoken': signatureToken, expiresIn: 600 });
+    res.header({ 'auth-token': signatureToken, expiresIn: 6000 }).send({ status: 'success', message: 'login success full',userInfo: user ,'authtoken': signatureToken, expiresIn: 600 });
 
 });
 
@@ -97,12 +96,12 @@ router.post('/getUserInfo', async (req, res) => {
    
     //const { error } = loginValidation(req.body)
     try {
-        if (req.body.userName) {
+        if (req.body.userId) {
 
-            let user = await User.findOne({ email: req.body.userName });
-            if (!user) {
+            let user = await User.findOne({ _id: req.body.userId });
+            /* if (!user) {
                 user = await User.findOne({ userName: req.body.userName });
-            }
+            } */
 
             if (!user) {
                 return res.status(400).send({ status: 'fail', message: 'user name doesnt exist' });
