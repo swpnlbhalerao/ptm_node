@@ -39,7 +39,7 @@ router.post('/getPayHistByUser', async(req, res) => {
          let userData  = await  PayShare.aggregate([ 
             {$match :{ userName :user,paymentYear : year}},
             {$sort: {paymentMonth:-1,paymentDay:-1}},
-            {$project: {_id:0,crtIp :0,paymentDay :0,paymentMonth :0,paymentYear :0,}}
+            {$project: {crtIp :0,paymentDay :0,paymentMonth :0,paymentYear :0,}}
             ])
 
             /* console.log(userData); */
