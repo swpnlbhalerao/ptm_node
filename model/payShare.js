@@ -23,21 +23,25 @@ const paySchema = new mongoose.Schema({
         default: '',
     },
     mdyDate: {
-        type: String,
-        default : ''
+        type: String
     },
     status: {
         type: String,
     },
     paymentDate: {
         type: String,
-    },paymentDay: {
+    }, paymentDay: {
         type: Number,
-    },paymentMonth: {
+    }, paymentMonth: {
         type: Number,
-    },paymentYear: {
+    }, paymentYear: {
         type: Number,
-    }
+    },
+    remarks: {
+        type: String,
+        default: ''
+    },
+
 })
 
 module.exports = mongoose.model('payShare', paySchema);

@@ -52,6 +52,9 @@ const userSchema = new mongoose.Schema({
     lastLoginDate: {
         type: String,
         default :null
+    },
+    regStatus :{
+        type:String,
     }
 })
 
